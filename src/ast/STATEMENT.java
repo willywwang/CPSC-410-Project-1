@@ -2,32 +2,44 @@ package ast;
 
 import libs.Node;
 
-public  abstract class STATEMENT extends Node {
-    public static STATEMENT getSubStatement(){
-        if (tokenizer.checkToken("set")) {
-            return new SET();
+import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
+
+public class STATEMENT extends Node {
+    NAME beforePaysOwes;
+    NAME afterPaysOwes;
+    AMOUNT amount;
+    Boolean owes = false; //if true, make amount a negative number
+
+    @Override
+    public void parse() {
+        System.out.println("in statement");
+
+        // deal with names
+        while (!tokenizer.checkToken(" pays ") && !tokenizer.checkToken(" owes ")){
+            //TODO add to beforePaysOwes
+            tokenizer.getNext();
         }
-        if (tokenizer.checkToken("get")){
-            return new USE();
+
+        // pays or owes
+        if(tokenizer.checkToken(" owes ")){
+            owes = true;
         }
-        if (tokenizer.checkToken("new")){
-            return new DEC();
+        tokenizer.getNext();
+
+        // deal with names part 2
+        while (!tokenizer.checkToken(":")){
+            //TODO add to afterPaysOwes
+            tokenizer.getNext();
         }
-        if (tokenizer.checkToken("print")){
-            return new PRINT();
-        }
-        if (tokenizer.checkToken("times")){
-            return new TIMES();
-        }
-        if (tokenizer.checkToken("def")){
-            //the fact that we're including this might be a problem
-            //as we evolve our language -- eventually we may want to put procedure definitions
-            //in another category
-            return new PROCDEC();
-        }
-        if (tokenizer.checkToken("call")){
-            return new PROCCALL();
-        }
-        else return null;
+
+        // amount
+        //TODO call amount
+        tokenizer.getNext();
+    }
+
+    @Override
+    public String evaluate() throws FileNotFoundException, UnsupportedEncodingException {
+        return null;
     }
 }

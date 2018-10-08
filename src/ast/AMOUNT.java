@@ -1,23 +1,19 @@
 package ast;
 
-import ui.Main;
+import libs.Node;
 
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 
-public class DEC extends STATEMENT {
-    private String name;
+public class AMOUNT extends Node {
 
     @Override
     public void parse() {
-        tokenizer.getAndCheckNext("new");
-        name = tokenizer.getNext();
+
     }
 
     @Override
     public String evaluate() throws FileNotFoundException, UnsupportedEncodingException {
-        System.out.println("Putting "+this.name+" into symbol table");
-        Main.symbolTable.put(name,"");
         return null;
     }
 }

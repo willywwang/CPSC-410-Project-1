@@ -1,16 +1,15 @@
 package ast;
 
+import libs.Node;
+
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 
-public class PROCCALL extends STATEMENT {
-    private String name;
-
+public class NAME extends Node {
 
     @Override
     public void parse() {
-        tokenizer.getAndCheckNext("call");
-        name = tokenizer.getNext();
+
     }
 
     @Override

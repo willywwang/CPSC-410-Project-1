@@ -12,24 +12,14 @@ public class PROGRAM extends Node{
 
     @Override
     public void parse() {
-        while (tokenizer.moreTokens()) {
-            STATEMENT s = STATEMENT.getSubStatement();
-//            if (tokenizer.checkToken("set")) {
-//                s = new SET();
-//            }
-//            else if (tokenizer.checkToken("get")){
-//                s = new USE();
-//            }
-//            else if (tokenizer.checkToken("new")){
-//                s = new DEC();
-//            }
-//            else if (tokenizer.checkToken("print")){
-//                s = new PRINT();
-//            }
-            s.parse();
+        System.out.println("start parser");
+        while(tokenizer.moreTokens()){
+            STATEMENT s = null;
+            s = new STATEMENT();
             statements.add(s);
+            s.parse();
+            tokenizer.getNext(); //must run getNext to increment
         }
-
     }
 
     @Override
