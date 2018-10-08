@@ -1,0 +1,13 @@
+def PRINTY
+    start
+    print YAY
+    print DONE
+    end
+new x
+new y
+set x 3
+set y 17
+times 3 do print get x
+times 5 do print get y
+times 2 do print hello!!
+call PRINTY
