@@ -1,6 +1,7 @@
 package libs;
 
 
+import javax.script.ScriptException;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -10,7 +11,7 @@ public abstract class Node {
     static protected PrintWriter writer;
 
     abstract public void parse();
-    abstract public String evaluate() throws FileNotFoundException, UnsupportedEncodingException;
+    abstract public String evaluate() throws FileNotFoundException, UnsupportedEncodingException, ScriptException;
 
 
 }
