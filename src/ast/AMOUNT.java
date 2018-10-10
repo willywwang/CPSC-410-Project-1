@@ -20,7 +20,9 @@ public class AMOUNT extends Node {
     public void parse() {
         amountVal = tokenizer.getNext();
 
-        isValid();
+        boolean isValid = isValid();
+
+        // throw exception based off validity
     }
 
     @Override
