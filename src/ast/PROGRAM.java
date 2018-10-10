@@ -14,8 +14,12 @@ public class PROGRAM extends Node{
     public void parse() {
         System.out.println("start parser");
         while(tokenizer.moreTokens()){
-            STATEMENT s = null;
-            s = new STATEMENT();
+            STATEMENT s;
+            if(tokenizer.checkToken("display")){
+                s = new DISPLAY();
+            } else {
+                s = new PAYSOWES();
+            }
             statements.add(s);
             s.parse();
             tokenizer.getNext(); //must run getNext to increment
