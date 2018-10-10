@@ -31,6 +31,7 @@ public class Tokenizer {
         String tokenizedProgram = program;
         tokenizedProgram = tokenizedProgram.toLowerCase();
         tokenizedProgram = tokenizedProgram.replace("\n","_");
+        tokenizedProgram = tokenizedProgram.replace("\r","_");
         System.out.println(program);
 
         for (String s : literals){
@@ -83,6 +84,7 @@ public class Tokenizer {
         System.out.println("matched: "+s+"  to  "+regexp);
         return s;
     }
+
 
     public boolean moreTokens(){
         return currentToken<tokens.length;

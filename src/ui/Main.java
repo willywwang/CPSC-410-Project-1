@@ -14,7 +14,7 @@ public class Main {
     public static Map<String,Object> symbolTable = new HashMap<>();
 
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
-        List<String> literals = Arrays.asList(" owes ", " pays ", " and ", ":");
+        List<String> literals = Arrays.asList(" owes ", " pays ", " and ", ":", ",", " every month", "|");
         Tokenizer.makeTokenizer("input.divide",literals);
         PROGRAM p = new PROGRAM();
         p.parse();
