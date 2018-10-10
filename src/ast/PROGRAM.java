@@ -15,7 +15,7 @@ public class PROGRAM extends Node{
         System.out.println("start parser");
         while(tokenizer.moreTokens()){
             STATEMENT s;
-            if(tokenizer.checkToken("display")){
+            if(tokenizer.checkToken("display ")){
                 s = new DISPLAY();
             } else {
                 s = new PAYSOWES();

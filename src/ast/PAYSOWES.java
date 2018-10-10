@@ -19,12 +19,21 @@ public class PAYSOWES extends STATEMENT {
         System.out.println("in statement");
 
         // deal with names
+        Boolean hasMoreNames = true;
         while (!tokenizer.checkToken(" pays ") && !tokenizer.checkToken(" owes ")){
             //TODO add to beforePaysOwes
+
+            //make sure that there are actually more names, and someone didn't make a typo with pays/owes
+            if (!hasMoreNames) System.exit(0);
+
             NAME n = new NAME();
             n.parse();
             beforePaysOwes.add(n);
-            if (tokenizer.checkToken(" and ")) tokenizer.getNext();
+            hasMoreNames = false;
+            if (tokenizer.checkToken(" and ")) {
+                tokenizer.getNext();
+                hasMoreNames = true;
+            }
 
         }
 
@@ -32,8 +41,8 @@ public class PAYSOWES extends STATEMENT {
         if(tokenizer.checkToken(" owes ")){
             owes = true;
         }
-        String x = tokenizer.getNext();
-        System.out.println("made it here " + x);
+        tokenizer.getNext();
+
         // deal with names part 2
         while (!tokenizer.checkToken(":")){
             NAME n = new NAME();
