@@ -2,6 +2,7 @@ package ast;
 
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,8 @@ public class PAYSOWES extends STATEMENT {
     List<NAME> afterPaysOwes = new ArrayList<>();
     AMOUNT amount;
     Boolean owes = false; //if true, make amount a negative number
+    MONTH startMonth;
+    MONTH endMonth;
 
     @Override
     public void parse() {
@@ -44,6 +47,24 @@ public class PAYSOWES extends STATEMENT {
         // amount
         amount = new AMOUNT();
         amount.parse();
+
+
+       // String next = tokenizer.getNext();
+        //check if it is a recurring payment, if so process start and end month
+        if (tokenizer.checkToken(" every month")) {
+            tokenizer.getNext();
+            Boolean b = tokenizer.checkToken("\\|");
+            tokenizer.getNext();
+            MONTH m = new MONTH();
+            m.parse();
+            startMonth = m;
+        }
+
+        //if there is no recurring payment, then only process one date, and put it in end date
+        tokenizer.getAndCheckNext("\\|");
+        MONTH m = new MONTH();
+        m.parse();
+        endMonth = m;
 
 
         if (!tokenizer.checkToken(",")) System.exit(0);
