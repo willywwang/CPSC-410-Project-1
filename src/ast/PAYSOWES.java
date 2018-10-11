@@ -64,16 +64,18 @@ public class PAYSOWES extends STATEMENT {
             tokenizer.getNext();
             Boolean b = tokenizer.checkToken("\\|");
             tokenizer.getNext();
-            MONTH m = new MONTH();
-            m.parse();
-            startMonth = m;
+            MONTH sm = new MONTH();
+            sm.parse();
+            startMonth = sm;
+
+            tokenizer.getAndCheckNext("\\|");
+            MONTH em = new MONTH();
+            em.parse();
+            endMonth = em;
         }
 
-        //if there is no recurring payment, then only process one date, and put it in end date
-        tokenizer.getAndCheckNext("\\|");
-        MONTH m = new MONTH();
-        m.parse();
-        endMonth = m;
+
+
 
 
         if (!tokenizer.checkToken(",")) System.exit(0);
