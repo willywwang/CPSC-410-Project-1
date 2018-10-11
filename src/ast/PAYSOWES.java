@@ -68,17 +68,18 @@ public class PAYSOWES extends STATEMENT {
             tokenizer.getNext();
             Boolean b = tokenizer.checkToken("\\|");
             tokenizer.getNext();
-            MONTH m = new MONTH();
-            m.parse();
-            startMonth = m;
 
-            //end month
+            MONTH sm = new MONTH();
+            sm.parse();
+            startMonth = sm;
+
             tokenizer.getAndCheckNext("\\|");
-            MONTH m2 = new MONTH();
-            m2.parse();
-            endMonth = m2;
+            MONTH em = new MONTH();
+            em.parse();
+            endMonth = em;
         }
 
+        
 
         if (!tokenizer.checkToken(",")) System.exit(0);
     }
