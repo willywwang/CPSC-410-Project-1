@@ -19,7 +19,7 @@ public class MONTH extends Node {
 
     @Override
     public String evaluate() throws FileNotFoundException, UnsupportedEncodingException, ScriptException {
-        return null;
+        return month.toString();
     }
 
     private Integer isValidMonth(String month) {

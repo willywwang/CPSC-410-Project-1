@@ -16,6 +16,6 @@ public class NAME extends Node {
 
     @Override
     public String evaluate() throws FileNotFoundException, UnsupportedEncodingException, ScriptException {
-        return null;
+        return name;
     }
 }

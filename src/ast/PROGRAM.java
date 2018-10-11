@@ -2,7 +2,9 @@ package ast;
 
 import libs.Node;
 
+import javax.script.ScriptException;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,10 +29,13 @@ public class PROGRAM extends Node{
     }
 
     @Override
-    public String evaluate() throws FileNotFoundException, UnsupportedEncodingException {
+    public String evaluate() throws FileNotFoundException, UnsupportedEncodingException, ScriptException {
+        System.out.println("evaluating");
+        writer = new PrintWriter("output.dot", "UTF-8");
         for (STATEMENT s : statements){
             s.evaluate();
         }
+        writer.close();
         return null;
     }
 }

@@ -3,6 +3,7 @@ package ui;
 import ast.PROGRAM;
 import libs.Tokenizer;
 
+import javax.script.ScriptException;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
@@ -11,9 +12,9 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static Map<String,Object> symbolTable = new HashMap<>();
+    public static HashMap<String,HashMap<String, Float>> symbolTable = new HashMap<>();
 
-    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ScriptException {
         List<String> literals = Arrays.asList(" owes ", " pays ", " and ", ":", ",", " every month", "|",
                 "display ", "debts", "transactions", " for ", " from ", " to ");
 

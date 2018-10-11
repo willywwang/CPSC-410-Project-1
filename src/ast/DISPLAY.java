@@ -13,7 +13,7 @@ public class DISPLAY extends STATEMENT {
     @Override
     public void parse() {
 
-        String x = tokenizer.getNext();
+        tokenizer.getNext();
         if (tokenizer.checkToken("debts")) debts = true;
         else if (!tokenizer.checkToken("transactions")) System.exit(0);
 
@@ -25,21 +25,19 @@ public class DISPLAY extends STATEMENT {
             tokenizer.getNext();
         }
         else {
-            NAME n = new NAME();
-            n.parse();
+            name = new NAME();
+            name.parse();
         }
 
         if (tokenizer.checkToken(" from ")) {
             tokenizer.getNext();
-            MONTH sm = new MONTH();
-            sm.parse();
-            startMonth = sm;
+            startMonth = new MONTH();
+            startMonth.parse();
 
             tokenizer.getAndCheckNext(" to ");
 
-            MONTH em = new MONTH();
-            em.parse();
-            endMonth = em;
+            endMonth = new MONTH();
+            endMonth.parse();
         }
 
         else if(!tokenizer.checkToken(",")) System.exit(0);
