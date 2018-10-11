@@ -52,6 +52,11 @@ public class AMOUNT extends Node {
                 rightBracketCount++;
             }
 
+            // If there are ever more right brackets compared to left brackets
+            if (rightBracketCount > leftBracketCount) {
+                return false;
+            }
+
             // If a character is a number
             if (Character.isDigit(currentChar)) {
                 if (currentVal == null) {
@@ -66,10 +71,11 @@ public class AMOUNT extends Node {
                 }
 
                 // Operation before value
-                if (isFirstIteration && currentVal == null) {
+                if (isFirstIteration && currentVal == null && currentChar != '(') {
                     return false;
-                } else if (!isFirstIteration && prevVal == null) {
+                } else if (!isFirstIteration && prevVal == null && currentChar != ')') {
                     // only exception to this is if we somehow end up with 2 right brackets together
+                    // therefore we allow an exception for right brackets
                     // ie. 9 + (5 * (4 / 2))
                     return false;
                 }
