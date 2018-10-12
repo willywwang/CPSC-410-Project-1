@@ -4,6 +4,7 @@ import ui.Main;
 
 import javax.script.ScriptException;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
@@ -50,21 +51,32 @@ public class DISPLAY extends STATEMENT {
 
     @Override
     public String evaluate() throws FileNotFoundException, UnsupportedEncodingException, ScriptException {
-        if(everyone){
+        writer = new PrintWriter("myOutput.dot", "UTF-8");
+        writer.println("digraph G{");
+        if(everyone) {
             //need to loop through each entry in symbol table and add anything that is a negative number
-        } else {
+        }
+        if(debts){
+            //return dot program string a -> b thing
             String n = name.evaluate();
             HashMap<String, Float> d = Main.symbolTable.get(n);
             //loop through each entry in
             for (Map.Entry<String, Float> entry : d.entrySet()) {
+                if (entry.getValue() > 0) {
+                    writer.println(n + "->" + entry.getKey() + "[label =\"" + entry.getValue() + "\"];");
+                }
+                else {
+                    writer.println(entry.getKey() + "->" + n + "[label =\"" + entry.getValue() + "\"];");
+                }
                 System.out.println(entry.getKey() + " = " + entry.getValue());
             }
-        }
-        if(debts){
-            //return dot program string a -> b thing
+
         } else {
             //return what it would look like as a transaction
         }
+
+        writer.println("}");
+        writer.close();
         return null;
     }
 }
