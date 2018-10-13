@@ -5,6 +5,7 @@ import ui.Main;
 import javax.script.ScriptException;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -97,7 +98,6 @@ public class PAYSOWES extends STATEMENT {
             amt *= getNumberOfMonths();
         }
 
-
         setSymbolTableEntries(beforePaysOwes, afterPaysOwes, amt);
         setSymbolTableEntries(afterPaysOwes, beforePaysOwes, -amt);
         return null;
@@ -132,7 +132,10 @@ public class PAYSOWES extends STATEMENT {
                     totalAmount += amt;
                 }
 
-                innerMap.put(innerName, totalAmount);
+                BigDecimal roundedAmount = new BigDecimal(totalAmount.toString());
+                roundedAmount = roundedAmount.setScale(2, BigDecimal.ROUND_HALF_UP);
+
+                innerMap.put(innerName, roundedAmount.floatValue());
                 Main.symbolTable.put(outerName,innerMap);
             }
         }
