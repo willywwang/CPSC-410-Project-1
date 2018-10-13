@@ -7,6 +7,7 @@ import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -32,8 +33,10 @@ public class AMOUNT extends Node {
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByName("js");
         Object result = engine.eval(amountVal);
+        BigDecimal roundedResult = new BigDecimal(result.toString());
+        roundedResult = roundedResult.setScale(2, BigDecimal.ROUND_HALF_UP);
 
-        return result.toString();
+        return roundedResult.toString();
     }
 
     // Determines if the given string is valid
