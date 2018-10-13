@@ -1,19 +1,19 @@
 digraph G{
 1 [label = "will w."];
 0 [label = "crystal"];
-1->0 [label = "0.9599991"];
+1->0 [label = "0.96"];
 3 [label = "carol"];
 0 [label = "crystal"];
 3->0 [label = "17.96"];
 5 [label = "racquel"];
 0 [label = "crystal"];
-5->0 [label = "0.9599991"];
+5->0 [label = "0.96"];
 0 [fontcolor = "red"];
 7 [label = "carol"];
 6 [label = "will w."];
 7->6 [label = "17.0"];
 6 [label = "will w."];
 9 [label = "crystal"];
-6->9 [label = "0.9599991"];
+6->9 [label = "0.96"];
 6 [fontcolor = "red"];
 }
