@@ -63,19 +63,19 @@ public class DISPLAY extends STATEMENT {
                     for (Map.Entry<String, Float> entry : d.entrySet()) {
 
                         if (entry.getValue() <= 0) {
-                            Integer positionTo = nameNumber.get(n);
-                            Integer positionFrom = nameNumber.get(entry.getKey());
-                            if (positionTo == null) {
-                                nameNumber.put(n, Main.displayDebtCount);
-                                positionTo = Main.displayDebtCount;
-                                Main.displayDebtCount++;
-                            }
+                            Integer positionFrom = nameNumber.get(n);
+                            Integer positionTo = nameNumber.get(entry.getKey());
                             if (positionFrom == null) {
-                                nameNumber.put(entry.getKey(), Main.displayDebtCount);
+                                nameNumber.put(n, Main.displayDebtCount);
                                 positionFrom = Main.displayDebtCount;
                                 Main.displayDebtCount++;
                             }
-                            createNodeEdge(positionFrom, entry.getKey(), positionTo, n, Math.abs(Float.valueOf(entry.getValue())));
+                            if (positionTo == null) {
+                                nameNumber.put(entry.getKey(), Main.displayDebtCount);
+                                positionTo = Main.displayDebtCount;
+                                Main.displayDebtCount++;
+                            }
+                            createNodeEdge(positionFrom, n, positionTo, entry.getKey(), Math.abs(Float.valueOf(entry.getValue())));
                         }
                     }
                 }
