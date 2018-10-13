@@ -12,6 +12,7 @@ import java.util.List;
 public class PROGRAM extends Node{
     private List<STATEMENT> statements = new ArrayList<>();
 
+
     @Override
     public void parse() {
         System.out.println("start parser");
@@ -32,9 +33,11 @@ public class PROGRAM extends Node{
     public String evaluate() throws FileNotFoundException, UnsupportedEncodingException, ScriptException {
         System.out.println("evaluating");
         writer = new PrintWriter("output.dot", "UTF-8");
+        writer.println("digraph G{");
         for (STATEMENT s : statements){
             s.evaluate();
         }
+        writer.println("}");
         writer.close();
         return null;
     }

@@ -13,7 +13,7 @@ import java.util.List;
 public class AMOUNT extends Node {
     String amountVal;
 
-    private List<Character> validOperators = Arrays.asList('*','/','+','-');
+    private List<Character> validOperators = Arrays.asList('(',')','*','/','+','-','.');
 
 
     @Override
@@ -22,6 +22,7 @@ public class AMOUNT extends Node {
         boolean isValid = isValid();
 
         if (!isValid) {
+            System.out.println("invalid");
             System.exit(0);
         }
     }
@@ -38,8 +39,8 @@ public class AMOUNT extends Node {
     // Determines if the given string is valid
     private boolean isValid() {
         String trimmedVal = amountVal.trim();
-        Character prevChar = null;
-        Character currentChar = null;
+        Character prevChar = ' ';
+        Character currentChar = ' ';
         boolean isFirstIteration = true;
         int leftBracketCount = 0;
         int rightBracketCount = 0;
@@ -60,7 +61,7 @@ public class AMOUNT extends Node {
             }
 
             // If a character is a number
-            if (!Character.isDigit(currentChar)) {
+            if (Character.isDigit(currentChar)) {
                 // Only ) character that cannot precede a number
                 if (prevChar == ')') {
                     return false;
@@ -81,16 +82,13 @@ public class AMOUNT extends Node {
                     // ie. (1+(2+3))
                     if (prevChar != ')') {
                         return false;
-                    } else if (currentChar != '(') {
-                        // ie. (1)(2) -> multiplication through brackets
-                        return false;
                     }
                 }
             }
 
             isFirstIteration = false;
             prevChar = currentChar;
-            currentChar = null;
+            currentChar = ' ';
         }
 
         // Inaccurate number of brackets
