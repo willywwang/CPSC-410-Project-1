@@ -55,6 +55,7 @@ public class DISPLAY extends STATEMENT {
 
         if(debts){
             if(everyone) {
+                //keep track of value of each node based on name
                 HashMap<String, Integer> nameNumber= new HashMap<String, Integer>();
                 //need to loop through each entry in symbol table and add anything that is a negative number
                 for (Map.Entry<String, HashMap<String, Float>> current: Main.symbolTable.entrySet()) {
@@ -65,6 +66,11 @@ public class DISPLAY extends STATEMENT {
                         if (entry.getValue() <= 0) {
                             Integer positionFrom = nameNumber.get(n);
                             Integer positionTo = nameNumber.get(entry.getKey());
+                            /*check if nodes already have a number associated with name, or if we need to create a new number
+                            this is due to the fact that nodes are identified by their name, so we have to assign numbers
+                            to nodes based on the current graph.
+
+                            */
                             if (positionFrom == null) {
                                 nameNumber.put(n, Main.displayDebtCount);
                                 positionFrom = Main.displayDebtCount;
@@ -79,6 +85,7 @@ public class DISPLAY extends STATEMENT {
                         }
                     }
                 }
+                //clear map so that next time "display debts for everyone is called", those results aren't merged with this current graph
                 nameNumber.clear();
             }
             else {
