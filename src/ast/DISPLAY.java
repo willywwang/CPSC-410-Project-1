@@ -4,14 +4,13 @@ import ui.Main;
 
 import javax.script.ScriptException;
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class DISPLAY extends STATEMENT {
     NAME name;
-    Boolean debts = false;
+    Boolean graph = false;
     Boolean everyone = false;
     MONTH startMonth;
     MONTH endMonth;
@@ -20,8 +19,9 @@ public class DISPLAY extends STATEMENT {
     public void parse() {
 
         tokenizer.getNext();
-        if (tokenizer.checkToken("debts")) debts = true;
-        else if (!tokenizer.checkToken("transactions")) System.exit(0);
+        tokenizer.getNext();
+        if (tokenizer.checkToken("graph")) graph = true;
+        else if (!tokenizer.checkToken("text")) System.exit(0);
 
         tokenizer.getNext();
         tokenizer.getAndCheckNext(" for ");
@@ -51,9 +51,9 @@ public class DISPLAY extends STATEMENT {
 
     @Override
     public String evaluate() throws FileNotFoundException, UnsupportedEncodingException, ScriptException {
-        int root = Main.displayDebtCount;
+        int root = Main.displayGraphCount;
 
-        if(debts){
+        if(graph){
             if(everyone) {
                 //keep track of value of each node based on name
                 HashMap<String, Integer> nameNumber= new HashMap<String, Integer>();
@@ -72,14 +72,14 @@ public class DISPLAY extends STATEMENT {
 
                             */
                             if (positionFrom == null) {
-                                nameNumber.put(n, Main.displayDebtCount);
-                                positionFrom = Main.displayDebtCount;
-                                Main.displayDebtCount++;
+                                nameNumber.put(n, Main.displayGraphCount);
+                                positionFrom = Main.displayGraphCount;
+                                Main.displayGraphCount++;
                             }
                             if (positionTo == null) {
-                                nameNumber.put(entry.getKey(), Main.displayDebtCount);
-                                positionTo = Main.displayDebtCount;
-                                Main.displayDebtCount++;
+                                nameNumber.put(entry.getKey(), Main.displayGraphCount);
+                                positionTo = Main.displayGraphCount;
+                                Main.displayGraphCount++;
                             }
                             Float temp = Math.abs(entry.getValue());
                             String amountOwed = String.format("%.2f", temp);
@@ -99,13 +99,13 @@ public class DISPLAY extends STATEMENT {
                     Float temp = Math.abs(entry.getValue());
                     String amountOwed = String.format("%.2f", temp);
                     if (entry.getValue() <= 0) {
-                        Main.displayDebtCount++;
-                        createNodeEdge(root, n, Main.displayDebtCount, entry.getKey(), amountOwed);
-                        Main.displayDebtCount++;
+                        Main.displayGraphCount++;
+                        createNodeEdge(root, n, Main.displayGraphCount, entry.getKey(), amountOwed);
+                        Main.displayGraphCount++;
                     } else {
-                        Main.displayDebtCount++;
-                        createNodeEdge(Main.displayDebtCount, entry.getKey(), root, n, amountOwed);
-                        Main.displayDebtCount++;
+                        Main.displayGraphCount++;
+                        createNodeEdge(Main.displayGraphCount, entry.getKey(), root, n, amountOwed);
+                        Main.displayGraphCount++;
                     }
 
                     System.out.println(entry.getKey() + " = " + entry.getValue());
@@ -113,7 +113,47 @@ public class DISPLAY extends STATEMENT {
                 writer.println(root + " [fontcolor = \"red\"];");
             }
         } else {
-            //return what it would look like as a transaction
+            //return what it would look like as a text
+            if (everyone) {
+                writer.println(Main.displayTextCount + " [shape = box label =\" everyone\'s debts\"];");
+                writer.println((Main.displayTextCount-0.5) + " [shape = box label =\"");
+                //need to loop through each entry in symbol table and add anything that is a negative number
+                for (Map.Entry<String, HashMap<String, Float>> current: Main.symbolTable.entrySet()) {
+                    HashMap<String, Float> d = current.getValue();
+                    String n = current.getKey();
+                    for (Map.Entry<String, Float> entry : d.entrySet()) {
+
+                        if (entry.getValue() <= 0) {
+                            Float temp = Math.abs(entry.getValue());
+                            String amountOwed = String.format("%.2f", temp);
+                            createTextForm(n, entry.getKey(), amountOwed);
+                        }
+                    }
+                }
+                writer.print("\"];\n");
+                writer.println(Main.displayTextCount + "->" + (Main.displayTextCount-0.5) + ";");
+                Main.displayTextCount--;
+
+            }
+            else {
+                String n = name.evaluate();
+                HashMap<String, Float> d = Main.symbolTable.get(n);
+                writer.println(Main.displayTextCount + " [shape = box label =\"" + n + "\'s debts\"];");
+                writer.println((Main.displayTextCount-0.5) + " [shape = box label =\"");
+                for (Map.Entry<String, Float> entry : d.entrySet()) {
+                    Float temp = Math.abs(entry.getValue());
+                    String amountOwed = String.format("%.2f", temp);
+                    if (entry.getValue() <= 0) {
+                            createTextForm(n, entry.getKey(), amountOwed);
+                    }
+                    else {
+                        createTextForm(entry.getKey(), n,amountOwed);
+                    }
+                }
+                writer.print("\"];\n");
+                writer.println(Main.displayTextCount + "->" + (Main.displayTextCount-0.5) + ";");
+                Main.displayTextCount--;
+            }
         }
         return null;
     }
@@ -128,4 +168,8 @@ public class DISPLAY extends STATEMENT {
                 writer.println(to + " [fontcolor = \"blue\"];");
             }
     }
+
+    private void createTextForm(String owes, String isOwed, String amount) {
+            writer.print(owes + " owes " + isOwed + " $" + amount + " \n ");
+        }
 }

@@ -17,6 +17,22 @@ A graph with all blue notes is the total debts owed so far"]
 8 [label = "racquel"];
 3->8 [label = "2.04"];
 3 [fontcolor = "red"];
+-1 [shape = box label ="crystal's debts"];
+-1.5 [shape = box label ="
+will w. owes crystal $0.96 
+ carol owes crystal $17.96 
+ crystal owes racquel $2.04 
+ "];
+-1->-1.5;
+-2 [shape = box label =" everyone's debts"];
+-2.5 [shape = box label ="
+will w. owes crystal $0.96 
+ carol owes will w. $17.00 
+ carol owes crystal $17.96 
+ carol owes racquel $20.00 
+ crystal owes racquel $2.04 
+ "];
+-2->-2.5;
 9 [label = "will w."];
 10 [label = "crystal"];
 9->10 [label = "0.96"];
