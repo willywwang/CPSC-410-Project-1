@@ -34,9 +34,13 @@ public class PROGRAM extends Node{
         System.out.println("evaluating");
         writer = new PrintWriter("output.dot", "UTF-8");
         writer.println("digraph G{");
+        writer.println("info [shape = box label=\"An arrow from X to Y means X owes Y \n " +
+                "A red name means that graph contains all debts for that name\n" +
+                "A graph with all blue notes is the total debts owed so far\"]");
         for (STATEMENT s : statements){
             s.evaluate();
         }
+
         writer.println("}");
         writer.close();
         return null;

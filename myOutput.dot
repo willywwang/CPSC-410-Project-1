@@ -1,0 +1,5 @@
+digraph G{
+crystal->will w.[label ="0.96899986"];
+crystal->carol[label ="17.969"];
+crystal->racquel[label ="0.96899986"];
+}

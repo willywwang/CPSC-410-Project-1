@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class Main {
     public static HashMap<String,HashMap<String, Float>> symbolTable = new HashMap<>();
-    public static Integer displayDebtCount = 0;
+    public static Integer displayDebtCount = 1;
     public static Integer displayTransactionCount = -1;
 
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ScriptException {

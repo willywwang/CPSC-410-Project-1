@@ -55,7 +55,31 @@ public class DISPLAY extends STATEMENT {
 
         if(debts){
             if(everyone) {
+                HashMap<String, Integer> nameNumber= new HashMap<String, Integer>();
                 //need to loop through each entry in symbol table and add anything that is a negative number
+                for (Map.Entry<String, HashMap<String, Float>> current: Main.symbolTable.entrySet()) {
+                    HashMap<String, Float> d = current.getValue();
+                    String n = current.getKey();
+                    for (Map.Entry<String, Float> entry : d.entrySet()) {
+
+                        if (entry.getValue() <= 0) {
+                            Integer positionTo = nameNumber.get(n);
+                            Integer positionFrom = nameNumber.get(entry.getKey());
+                            if (positionTo == null) {
+                                nameNumber.put(n, Main.displayDebtCount);
+                                positionTo = Main.displayDebtCount;
+                                Main.displayDebtCount++;
+                            }
+                            if (positionFrom == null) {
+                                nameNumber.put(entry.getKey(), Main.displayDebtCount);
+                                positionFrom = Main.displayDebtCount;
+                                Main.displayDebtCount++;
+                            }
+                            createNodeEdge(positionFrom, entry.getKey(), positionTo, n, Math.abs(Float.valueOf(entry.getValue())));
+                        }
+                    }
+                }
+                nameNumber.clear();
             }
             else {
                 //return dot program string a -> b thing
@@ -85,9 +109,12 @@ public class DISPLAY extends STATEMENT {
 
 
     private void createNodeEdge(Integer from, String fromLabel, Integer to, String toLabel, Float edgeValue) {
-        writer.println(from + " [label = \"" + fromLabel + "\"];");
-        writer.println(to + " [label = \"" + toLabel + "\"];");
-        writer.println(from + "->" + to + " [label = \"" + edgeValue + "\"];");
-
+            writer.println(from + " [label = \"" + fromLabel + "\"];");
+            writer.println(to + " [label = \"" + toLabel + "\"];");
+            writer.println(from + "->" + to + " [label = \"" + edgeValue + "\"];");
+            if (everyone) {
+                writer.println(from + " [fontcolor = \"blue\"];");
+                writer.println(to + " [fontcolor = \"blue\"];");
+            }
     }
 }

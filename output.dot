@@ -1,19 +1,45 @@
 digraph G{
-1 [label = "will w."];
-0 [label = "crystal"];
-1->0 [label = "0.96899986"];
-3 [label = "carol"];
-0 [label = "crystal"];
-3->0 [label = "17.969"];
-5 [label = "racquel"];
-0 [label = "crystal"];
-5->0 [label = "0.96899986"];
-0 [fontcolor = "red"];
-7 [label = "carol"];
-6 [label = "will w."];
-7->6 [label = "17.0"];
-6 [label = "will w."];
-9 [label = "crystal"];
-6->9 [label = "0.96899986"];
-6 [fontcolor = "red"];
+info [shape = box label="An arrow from X to Y means X owes Y 
+ A red name means that graph contains all debts for that name
+A graph with all blue notes is the total debts owed so far"]
+2 [label = "racquel"];
+1 [label = "crystal"];
+2->1 [label = "3.0"];
+2 [fontcolor = "blue"];
+1 [fontcolor = "blue"];
+4 [label = "will w."];
+3 [label = "crystal"];
+4->3 [label = "0.96899986"];
+6 [label = "carol"];
+3 [label = "crystal"];
+6->3 [label = "17.969"];
+3 [label = "crystal"];
+8 [label = "racquel"];
+3->8 [label = "2.0310001"];
+3 [fontcolor = "red"];
+10 [label = "crystal"];
+9 [label = "will w."];
+10->9 [label = "0.96899986"];
+10 [fontcolor = "blue"];
+9 [fontcolor = "blue"];
+9 [label = "will w."];
+11 [label = "carol"];
+9->11 [label = "17.0"];
+9 [fontcolor = "blue"];
+11 [fontcolor = "blue"];
+10 [label = "crystal"];
+11 [label = "carol"];
+10->11 [label = "17.969"];
+10 [fontcolor = "blue"];
+11 [fontcolor = "blue"];
+12 [label = "racquel"];
+11 [label = "carol"];
+12->11 [label = "20.0"];
+12 [fontcolor = "blue"];
+11 [fontcolor = "blue"];
+12 [label = "racquel"];
+10 [label = "crystal"];
+12->10 [label = "2.0310001"];
+12 [fontcolor = "blue"];
+10 [fontcolor = "blue"];
 }
