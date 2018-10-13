@@ -2,60 +2,36 @@ digraph G{
 info [shape = box label="An arrow from X to Y means X owes Y 
  A red name means that graph contains all debts for that name
 A graph with all blue notes is the total debts owed so far"]
-1 [label = "crystal"];
-2 [label = "racquel"];
-1->2 [label = "3.00"];
-1 [fontcolor = "blue"];
-2 [fontcolor = "blue"];
-4 [label = "will w."];
-3 [label = "crystal"];
-4->3 [label = "0.96"];
-6 [label = "carol"];
-3 [label = "crystal"];
-6->3 [label = "17.96"];
-3 [label = "crystal"];
-8 [label = "racquel"];
-3->8 [label = "2.04"];
-3 [fontcolor = "red"];
--1 [shape = box label ="crystal's debts"];
+1 [label = "sam w"];
+2 [label = "sam s"];
+1->2 [label = "32.00"];
+1 [fontcolor = "red"];
+3 [label = "carol"];
+4 [label = "bob"];
+3->4 [label = "8.33"];
+3 [fontcolor = "blue"];
+4 [fontcolor = "blue"];
+3 [label = "carol"];
+5 [label = "crystal"];
+3->5 [label = "4.95"];
+3 [fontcolor = "blue"];
+5 [fontcolor = "blue"];
+6 [label = "sam w"];
+7 [label = "sam s"];
+6->7 [label = "32.00"];
+6 [fontcolor = "blue"];
+7 [fontcolor = "blue"];
+6 [label = "sam w"];
+4 [label = "bob"];
+6->4 [label = "8.33"];
+6 [fontcolor = "blue"];
+4 [fontcolor = "blue"];
+-1 [shape = box label =" everyone's debts"];
 -1.5 [shape = box label ="
-will w. owes crystal $0.96 
- carol owes crystal $17.96 
- crystal owes racquel $2.04 
+carol owes bob $8.33 
+ carol owes crystal $4.95 
+ sam w owes sam s $32.00 
+ sam w owes bob $8.33 
  "];
 -1->-1.5;
--2 [shape = box label =" everyone's debts"];
--2.5 [shape = box label ="
-will w. owes crystal $0.96 
- carol owes will w. $17.00 
- carol owes crystal $17.96 
- carol owes racquel $20.00 
- crystal owes racquel $2.04 
- "];
--2->-2.5;
-9 [label = "will w."];
-10 [label = "crystal"];
-9->10 [label = "0.96"];
-9 [fontcolor = "blue"];
-10 [fontcolor = "blue"];
-11 [label = "carol"];
-9 [label = "will w."];
-11->9 [label = "17.00"];
-11 [fontcolor = "blue"];
-9 [fontcolor = "blue"];
-11 [label = "carol"];
-10 [label = "crystal"];
-11->10 [label = "17.96"];
-11 [fontcolor = "blue"];
-10 [fontcolor = "blue"];
-11 [label = "carol"];
-12 [label = "racquel"];
-11->12 [label = "20.00"];
-11 [fontcolor = "blue"];
-12 [fontcolor = "blue"];
-10 [label = "crystal"];
-12 [label = "racquel"];
-10->12 [label = "2.04"];
-10 [fontcolor = "blue"];
-12 [fontcolor = "blue"];
 }

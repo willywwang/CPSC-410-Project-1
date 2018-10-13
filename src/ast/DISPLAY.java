@@ -17,7 +17,6 @@ public class DISPLAY extends STATEMENT {
     public void parse() {
 
         tokenizer.getNext();
-        tokenizer.getNext();
         if (tokenizer.checkToken("graph")) graph = true;
         else if (!tokenizer.checkToken("text")) System.exit(0);
 

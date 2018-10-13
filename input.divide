@@ -1,10 +1,9 @@
-crystal owes racquel: 3,
+carol owes crystal: 8*1.15,
+carol pays crystal: 4.25,
+sam w owes sam s: 4 every month|September|April,
+display debts as graph for sam w,
+carol and sam w owes bob: 25/3,
 display debts as graph for everyone,
-caRol and racquel and Will w. owes crystal: 10.323*1 every month|January|March,
-CrysTal AND carol owes racquel and WILL W.: (3+3)/2 every month|March|December,
-carol PAYS crystal and will W.: 2-3+4,
-will w. and racquel and crystal owes carol: 30/3,
-display debts as graph for Crystal,
-display debts as text for Crystal,
 display debts as text for everyone,
-display debts as graph for everyone,
+
+

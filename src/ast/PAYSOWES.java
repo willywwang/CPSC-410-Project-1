@@ -106,6 +106,9 @@ public class PAYSOWES extends STATEMENT {
     private Integer getNumberOfMonths() throws FileNotFoundException, UnsupportedEncodingException, ScriptException {
         Integer sMonth = Integer.parseInt(startMonth.evaluate());
         Integer eMonth = Integer.parseInt(endMonth.evaluate());
+        if (eMonth < sMonth) {
+            return (12-sMonth)+eMonth + 1;
+        }
         return eMonth - sMonth + 1;
     }
 

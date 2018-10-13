@@ -18,7 +18,7 @@ public class PROGRAM extends Node{
         System.out.println("start parser");
         while(tokenizer.moreTokens()){
             STATEMENT s;
-            if(tokenizer.checkToken("display debts")){
+            if(tokenizer.checkToken("display debts as ")){
                 s = new DISPLAY();
             } else {
                 s = new PAYSOWES();
