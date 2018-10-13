@@ -12,8 +12,6 @@ public class DISPLAY extends STATEMENT {
     NAME name;
     Boolean graph = false;
     Boolean everyone = false;
-    MONTH startMonth;
-    MONTH endMonth;
 
     @Override
     public void parse() {
@@ -35,18 +33,7 @@ public class DISPLAY extends STATEMENT {
             name.parse();
         }
 
-        if (tokenizer.checkToken(" from ")) {
-            tokenizer.getNext();
-            startMonth = new MONTH();
-            startMonth.parse();
-
-            tokenizer.getAndCheckNext(" to ");
-
-            endMonth = new MONTH();
-            endMonth.parse();
-        }
-
-        else if(!tokenizer.checkToken(",")) System.exit(0);
+        if(!tokenizer.checkToken(",")) System.exit(0);
     }
 
     @Override

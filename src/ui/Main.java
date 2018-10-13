@@ -19,7 +19,7 @@ public class Main {
 
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ScriptException {
         List<String> literals = Arrays.asList(" owes ", " pays ", " and ", ":", ",", " every month", "|",
-                "display debts", " as ", " for ", " from ", " to ");
+                "display debts as ", " for ");
 
         Tokenizer.makeTokenizer("input.divide",literals);
         PROGRAM p = new PROGRAM();

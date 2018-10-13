@@ -1,4 +1,7 @@
 PROGRAM     := STATEMENT*
-STATEMENT   := NAME ("owes"/"pays") NAME AMOUNT
-NAME        := \D ("and" \D)*
+STATEMENT   := PAYSOWES | DISPLAY ","
+PAYSOWES    := NAME (" owes " | " pays ") NAME ":" AMOUNT (" every month " | MONTH | MONTH )
+DISPLAY     := "display debts as " ("text" | "graph") " for " (NAME | "everyone")
+NAME        := \D (" and " \D)*
 AMOUNT      := Number (positive) ([*|/|+|-]Number)*
+MONTH       := "january" | "february" | "march" | "april" | "may" | "june" | "july" | "august" | "september" | "october" | "november" | "december"
