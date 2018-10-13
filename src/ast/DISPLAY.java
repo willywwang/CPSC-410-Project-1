@@ -81,7 +81,9 @@ public class DISPLAY extends STATEMENT {
                                 positionTo = Main.displayDebtCount;
                                 Main.displayDebtCount++;
                             }
-                            createNodeEdge(positionFrom, n, positionTo, entry.getKey(), Math.abs(Float.valueOf(entry.getValue())));
+                            Float temp = Math.abs(entry.getValue());
+                            String amountOwed = String.format("%.2f", temp);
+                            createNodeEdge(positionFrom, n, positionTo, entry.getKey(),amountOwed);
                         }
                     }
                 }
@@ -94,13 +96,15 @@ public class DISPLAY extends STATEMENT {
                 HashMap<String, Float> d = Main.symbolTable.get(n);
                 //loop through each entry in
                 for (Map.Entry<String, Float> entry : d.entrySet()) {
+                    Float temp = Math.abs(entry.getValue());
+                    String amountOwed = String.format("%.2f", temp);
                     if (entry.getValue() <= 0) {
                         Main.displayDebtCount++;
-                        createNodeEdge(root, n, Main.displayDebtCount, entry.getKey(), Math.abs(Float.valueOf(entry.getValue())));
+                        createNodeEdge(root, n, Main.displayDebtCount, entry.getKey(), amountOwed);
                         Main.displayDebtCount++;
                     } else {
                         Main.displayDebtCount++;
-                        createNodeEdge(Main.displayDebtCount, entry.getKey(), root, n, Math.abs(Float.valueOf(entry.getValue())));
+                        createNodeEdge(Main.displayDebtCount, entry.getKey(), root, n, amountOwed);
                         Main.displayDebtCount++;
                     }
 
@@ -115,7 +119,7 @@ public class DISPLAY extends STATEMENT {
     }
 
 
-    private void createNodeEdge(Integer from, String fromLabel, Integer to, String toLabel, Float edgeValue) {
+    private void createNodeEdge(Integer from, String fromLabel, Integer to, String toLabel, String edgeValue) {
             writer.println(from + " [label = \"" + fromLabel + "\"];");
             writer.println(to + " [label = \"" + toLabel + "\"];");
             writer.println(from + "->" + to + " [label = \"" + edgeValue + "\"];");
